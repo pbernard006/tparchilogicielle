@@ -2,6 +2,14 @@ package com.gildedrose;
 
 class GildedRose {
     Item[] items;
+    
+    static final int QUALITY_MAX = 50 ;
+    static final int DAY_1 = 10 ;
+    static final int DAY_2 = 5 ;
+    
+    static final String NAME_ITEM_1 = "Aged Brie";
+    static final String NAME_ITEM_2 = "Backstage passes to a TAFKAL80ETC concert" ;
+    static final String NAME_ITEM_3 = "Sulfuras, Hand of Ragnaros" ;
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -9,26 +17,26 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!items[i].name.equals(NAME_ITEM_1)
+                    && !items[i].name.equals(NAME_ITEM_2)) {
                 if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                    if (!items[i].name.equals(NAME_ITEM_3)) {
                         items[i].quality --;
                     }
                 }
             } else {
-                if (items[i].quality < 50) {
+                if (items[i].quality < QUALITY_MAX) {
                     items[i].quality ++;
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
+                    if (items[i].name.equals(NAME_ITEM_2)) {
+                        if (items[i].sellIn <= DAY_1) {
+                            if (items[i].quality < QUALITY_MAX) {
                                 items[i].quality ++;
                             }
                         }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
+                        if (items[i].sellIn <= DAY_2) {
+                            if (items[i].quality < QUALITY_MAX) {
                                 items[i].quality ++;
                             }
                         }
@@ -37,15 +45,15 @@ class GildedRose {
             }
 
             //A mettre dans updateSellIn()
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!items[i].name.equals(NAME_ITEM_3)) {
                 items[i].sellIn --;
             }
 
             if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!items[i].name.equals(NAME_ITEM_1)) {
+                    if (!items[i].name.equals(NAME_ITEM_2)) {
                         if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                            if (!items[i].name.equals(NAME_ITEM_3)) {
                                 items[i].quality --;
                             }
                         }
@@ -53,7 +61,7 @@ class GildedRose {
                         items[i].quality = 0;
                     }
                 } else {
-                    if (items[i].quality < 50) {
+                    if (items[i].quality < QUALITY_MAX) {
                         items[i].quality ++;
                     }
                 }
