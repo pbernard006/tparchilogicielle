@@ -15,17 +15,11 @@ class GildedRose {
         this.items = items;
     }
 
+    
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals(NAME_ITEM_1)
-                    && !items[i].name.equals(NAME_ITEM_2)) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals(NAME_ITEM_3)) {
-                        items[i].quality --;
-                    }
-                }
-            } else {
-                if (items[i].quality < QUALITY_MAX) {
+        	if(testName(items[i].name)) {
+        		if (items[i].quality < QUALITY_MAX) {
                     items[i].quality ++;
 
                     if (items[i].name.equals(NAME_ITEM_2)) {
@@ -42,9 +36,16 @@ class GildedRose {
                         }
                     }
                 }
-            }
-
-            //A mettre dans updateSellIn()
+        	}
+        	else {
+        		if (items[i].quality > 0) {
+                    if (!items[i].name.equals(NAME_ITEM_3)) {
+                        items[i].quality --;
+                    }
+                }        		
+        	}
+        	
+        	//A mettre dans updateSellIn()
             if (!items[i].name.equals(NAME_ITEM_3)) {
                 items[i].sellIn --;
             }
@@ -71,5 +72,14 @@ class GildedRose {
     
     public void updateSellIn() {
     	
+    }
+    
+    public boolean testName(String name) {
+    	if(name.equals(NAME_ITEM_1) || name.equals(NAME_ITEM_2)) {
+    		return true ;
+    	}
+    	else {
+    		return false ;
+    	}
     }
 }
