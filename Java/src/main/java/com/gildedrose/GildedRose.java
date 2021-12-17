@@ -19,18 +19,18 @@ class GildedRose {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
         	if(testName(items[i].name)) {
-        		if (items[i].quality < QUALITY_MAX) {
+        		if (testQuality(items[i].quality)) {
                     items[i].quality ++;
 
                     if (items[i].name.equals(NAME_ITEM_2)) {
                         if (items[i].sellIn <= DAY_1) {
-                            if (items[i].quality < QUALITY_MAX) {
+                            if (testQuality(items[i].quality)) {
                                 items[i].quality ++;
                             }
                         }
 
                         if (items[i].sellIn <= DAY_2) {
-                            if (items[i].quality < QUALITY_MAX) {
+                            if (testQuality(items[i].quality)) {
                                 items[i].quality ++;
                             }
                         }
@@ -62,7 +62,7 @@ class GildedRose {
                         items[i].quality = 0;
                     }
                 } else {
-                    if (items[i].quality < QUALITY_MAX) {
+                    if (testQuality(items[i].quality)) {
                         items[i].quality ++;
                     }
                 }
@@ -79,6 +79,14 @@ class GildedRose {
     		return true ;
     	}
     	else {
+    		return false ;
+    	}
+    }
+    
+    public boolean testQuality(int quality) {
+    	if(quality < QUALITY_MAX) {
+    		return true ;
+    	}else {
     		return false ;
     	}
     }
