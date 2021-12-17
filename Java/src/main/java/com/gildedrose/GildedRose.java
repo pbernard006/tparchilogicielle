@@ -33,8 +33,9 @@ class GildedRose {
 					}
 				}
 			}
-
-			updateSellIn();
+			if (!items[i].name.equals(NAME_ITEM_3)) {
+				items[i].sellIn--;
+			}
 
 			if (items[i].sellIn < 0) {
 				if (!items[i].name.equals(NAME_ITEM_1)) {
@@ -53,16 +54,7 @@ class GildedRose {
 			}
 		}
 	}
-
-	public void updateSellIn() {
-		for (int i = 0; i < items.length; i++) {
-			if (!items[i].name.equals(NAME_ITEM_3)) {
-				items[i].sellIn--;
-			}
-		}
-
-	}
-
+	
 	public boolean testNameItem1Item2(String name) {
 		if (name.equals(NAME_ITEM_1) || name.equals(NAME_ITEM_2)) {
 			return true;
