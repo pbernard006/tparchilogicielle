@@ -24,18 +24,17 @@ class GildedRose {
 
 					if (items[i].name.equals(NAME_ITEM_2) && testSellInLowerDay1(items[i].sellIn)
 							&& testQualityLowerMax(items[i].quality)) {
-						addQuality(items[i].sellIn, items[i].quality);
-					}
+						items[i].quality = addQuality(items[i].sellIn, items[i].quality);
+						}
 				}
 			} else {
 				if (items[i].quality > 0) {
-					if (!items[i].name.equals(NAME_ITEM_3) && !items[i].name.equals(NAME_ITEM_4)) {
-						items[i].quality--;
+					if (!items[i].name.equals(NAME_ITEM_3)) {
+						
+						items[i].quality = removeQuality(items[i].quality, items[i].name);
+						
+						}
 					}
-					else if(items[i].name.equals(NAME_ITEM_4)){
-						items[i].quality = items[i].quality -2 ;
-					}
-				}
 			}
 			if (!items[i].name.equals(NAME_ITEM_3)) {
 				items[i].sellIn--;
@@ -44,11 +43,8 @@ class GildedRose {
 			if (items[i].sellIn < 0) {
 				if (!items[i].name.equals(NAME_ITEM_1)) {
 					if (!items[i].name.equals(NAME_ITEM_2)) {
-						if (items[i].quality > 0 && !items[i].name.equals(NAME_ITEM_3) && !items[i].name.equals(NAME_ITEM_4)) {
-							items[i].quality--;
-						}
-						else if(items[i].name.equals(NAME_ITEM_4)) {
-							items[i].quality = items[i].quality -2 ;
+						if (items[i].quality > 0 && !items[i].name.equals(NAME_ITEM_3)) {
+							items[i].quality = removeQuality(items[i].quality, items[i].name);
 						}
 					} else {
 						items[i].quality = 0;
@@ -86,11 +82,21 @@ class GildedRose {
 		}
 	}
 
-	public void addQuality(int sellIn, int quality) {
+	public int addQuality(int sellIn, int quality) {
 		if (sellIn <= DAY_2) {
 			quality = quality + 2;
+			
 		} else {
 			quality++;
 		}
+		return quality ;
+	}
+	public int removeQuality(int quality, String name) {
+		if(name.equals(NAME_ITEM_4)) {
+			quality = quality - 2 ;
+		}else {
+			quality -- ;
+		}
+		return quality ;
 	}
 }
