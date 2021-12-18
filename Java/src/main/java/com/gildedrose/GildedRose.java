@@ -10,7 +10,7 @@ class GildedRose {
 	static final String NAME_ITEM_1 = "Aged Brie";
 	static final String NAME_ITEM_2 = "Backstage passes to a TAFKAL80ETC concert";
 	static final String NAME_ITEM_3 = "Sulfuras, Hand of Ragnaros";
-	static final String NAME_ITEM_4 = "Conjured Mana Cake" ; 
+	static final String NAME_ITEM_4 = "Conjured Mana Cake";
 
 	public GildedRose(Item[] items) {
 		this.items = items;
@@ -25,17 +25,18 @@ class GildedRose {
 					if (items[i].name.equals(NAME_ITEM_2) && testSellInLowerDay1(items[i].sellIn)
 							&& testQualityLowerMax(items[i].quality)) {
 						items[i].quality = addQuality(items[i].sellIn, items[i].quality);
-						}
+					}
 				}
 			} else {
 				if (items[i].quality > 0) {
 					if (!items[i].name.equals(NAME_ITEM_3)) {
-						
+
 						items[i].quality = removeQuality(items[i].quality, items[i].name);
-						
-						}
+
 					}
+				}
 			}
+			items[i].sellIn = updateSellIn(items[i].sellIn, NAME_ITEM_3);
 			if (!items[i].name.equals(NAME_ITEM_3)) {
 				items[i].sellIn--;
 			}
@@ -57,7 +58,14 @@ class GildedRose {
 			}
 		}
 	}
-	
+
+	public int updateSellIn(int sellIn, String name) {
+		if (!name.equals(NAME_ITEM_3)) {
+			sellIn--;
+		}
+		return sellIn ;
+	}
+
 	public boolean testNameItem1Item2(String name) {
 		if (name.equals(NAME_ITEM_1) || name.equals(NAME_ITEM_2)) {
 			return true;
@@ -85,18 +93,19 @@ class GildedRose {
 	public int addQuality(int sellIn, int quality) {
 		if (sellIn <= DAY_2) {
 			quality = quality + 2;
-			
+
 		} else {
 			quality++;
 		}
-		return quality ;
+		return quality;
 	}
+
 	public int removeQuality(int quality, String name) {
-		if(name.equals(NAME_ITEM_4)) {
-			quality = quality - 2 ;
-		}else {
-			quality -- ;
+		if (name.equals(NAME_ITEM_4)) {
+			quality = quality - 2;
+		} else {
+			quality--;
 		}
-		return quality ;
+		return quality;
 	}
 }
