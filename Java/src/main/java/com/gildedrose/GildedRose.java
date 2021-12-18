@@ -10,6 +10,7 @@ class GildedRose {
 	static final String NAME_ITEM_1 = "Aged Brie";
 	static final String NAME_ITEM_2 = "Backstage passes to a TAFKAL80ETC concert";
 	static final String NAME_ITEM_3 = "Sulfuras, Hand of Ragnaros";
+	static final String NAME_ITEM_4 = "Conjured Mana Cake" ; 
 
 	public GildedRose(Item[] items) {
 		this.items = items;
@@ -28,8 +29,11 @@ class GildedRose {
 				}
 			} else {
 				if (items[i].quality > 0) {
-					if (!items[i].name.equals(NAME_ITEM_3)) {
+					if (!items[i].name.equals(NAME_ITEM_3) && !items[i].name.equals(NAME_ITEM_4)) {
 						items[i].quality--;
+					}
+					else if(items[i].name.equals(NAME_ITEM_4)){
+						items[i].quality = items[i].quality -2 ;
 					}
 				}
 			}
@@ -40,8 +44,11 @@ class GildedRose {
 			if (items[i].sellIn < 0) {
 				if (!items[i].name.equals(NAME_ITEM_1)) {
 					if (!items[i].name.equals(NAME_ITEM_2)) {
-						if (items[i].quality > 0 && !items[i].name.equals(NAME_ITEM_3)) {
+						if (items[i].quality > 0 && !items[i].name.equals(NAME_ITEM_3) && !items[i].name.equals(NAME_ITEM_4)) {
 							items[i].quality--;
+						}
+						else if(items[i].name.equals(NAME_ITEM_4)) {
+							items[i].quality = items[i].quality -2 ;
 						}
 					} else {
 						items[i].quality = 0;
